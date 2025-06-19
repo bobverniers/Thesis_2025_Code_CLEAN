@@ -377,3 +377,7 @@ func Load(f io.Reader, stripURI bool) (*SchemaTree, error) {
 	log.Println("finished decoding tree in ", time.Since(t1))
 	return tree, err
 }
+
+func (tree *SchemaTree) NoWritersListProperties() []*IItem {
+	return tree.PropMap.noWritersList_properties()
+}

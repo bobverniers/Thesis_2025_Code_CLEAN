@@ -1,0 +1,7 @@
+{"tags": {"building": "university", "name": "NU Building", "amenity": "computer_rooms", "addr:city": "Amsterdam"}}
+{"tags": {"building": "university", "name": "Main Building", "amenity": "cafeteria", "addr:city": "Amsterdam"}}
+{"tags": {"building": "housing", "name": "Uilenstede", "amenity": "rooms", "addr:city": "Amsterdam"}}
+{"tags": {"building": "university", "name": "Science Center", "amenity": "lab", "addr:city": "Amsterdam"}}
+{"tags": {"building": "university", "name": "Law Faculty", "amenity": "lecture_hall", "addr:city": "Amsterdam"}}
+{"tags": {"building": "university", "name": "VU Library", "amenity": "library", "addr:city": "Amsterdam"}}
+{"tags": {"building": "university", "name": "Medical Center", "amenity": "hospital", "addr:city": "Amsterdam"}}
