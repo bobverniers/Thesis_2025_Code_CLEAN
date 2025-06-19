@@ -8,7 +8,8 @@ require (
 	fortio.org/safecast v1.0.0
 	github.com/google/uuid v1.6.0
 	github.com/pkg/errors v0.9.1
-	github.com/spf13/cobra v1.8.1
+	github.com/sashabaranov/go-openai v1.40.1
+	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
 	gitlab.com/tozd/go/errors v0.10.0
 	gitlab.com/tozd/go/mediawiki v0.16.0
@@ -47,11 +48,10 @@ require (
 	github.com/pingcap/tidb/pkg/parser v0.0.0-20250113182422-1f74ac33d036 // indirect
 	github.com/pjbgf/sha1cd v0.3.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/sashabaranov/go-openai v1.40.1 // indirect
 	github.com/sergi/go-diff v1.3.2-0.20230802210424-5b0b94c5c0d3 // indirect
 	github.com/skeema/knownhosts v1.3.0 // indirect
 	github.com/spf13/cast v1.7.1 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
 	gitlab.com/tozd/go/x v0.0.0-20241208093944-f7d7781199da // indirect
 	go.uber.org/atomic v1.11.0 // indirect
