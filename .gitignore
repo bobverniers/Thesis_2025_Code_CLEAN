@@ -1,0 +1,26 @@
+# Ignore SchemaTree model files
+*.pb
+*.pb.gz
+*.tsv
+*.tsv.gz
+
+# Ignore CSV data files
+*.csv
+
+# Ignore Python bytecode
+__pycache__/
+*.pyc
+
+# Ignore system files
+.DS_Store
+
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Logs
+*.log
