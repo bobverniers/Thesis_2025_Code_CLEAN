@@ -5,6 +5,7 @@ package strategy
 import (
 	"RecommenderServer/backoff"
 	"RecommenderServer/schematree"
+	"fmt"
 )
 
 // Helper method to create a condition that always evaluates to true.
@@ -146,6 +147,83 @@ func MakePresetWorkflow(name string, tree *schematree.SchemaTree) *Workflow {
 	default:
 		panic("Given strategy name does not exist as a preset.")
 	}
+
+	return &wf
+}
+
+func MakeModelCWorkflow(tree *schematree.SchemaTree) *Workflow {
+	wf := Workflow{}
+
+	wf.Push(
+		MakeAlwaysCondition(),
+		func(asm *schematree.Instance) schematree.PropertyRecommendations {
+			// Step 1: Get top N SchemaTree recommendations
+			schemaRecs := asm.CalcRecommendations()
+			if len(schemaRecs) > 30 {
+				schemaRecs = schemaRecs[:30]
+			}
+
+			// Debug: Print top SchemaTree recommendations
+			fmt.Println("Top SchemaTree recommendations:")
+			for i, rec := range schemaRecs {
+				fmt.Printf("  [%d] %s (%.2f%%)\n", i+1, *rec.Property.Str, rec.Probability*100)
+			}
+
+			// Step 2: Extract candidate tag keys
+			var candidateTags []string
+			for _, rec := range schemaRecs {
+				candidateTags = append(candidateTags, *rec.Property.Str)
+			}
+
+			// Step 3: Collect input tags
+			var inputStrings []string
+			for _, prop := range asm.Props {
+				inputStrings = append(inputStrings, *prop.Str)
+			}
+
+			// Step 4: Call LLM to reorder candidate tags
+			llm := backoff.NewLLMBackoff(tree)
+			reordered := llm.CallWithCandidateList(inputStrings, candidateTags)
+
+			// Debug: Print LLM-reordered tags
+			fmt.Println("\nLLM re-ranked recommendations:")
+			for i, rec := range reordered {
+				fmt.Printf("  [%d] %s\n", i+1, *rec.Property.Str)
+			}
+
+			// Step 5: Return only the top 8 tags
+			if len(reordered) > 8 {
+				reordered = reordered[:8]
+			}
+			return reordered
+		},
+		"SchemaTree top-N + LLM re-ranking, returning top 8",
+	)
+
+	return &wf
+
+}
+
+// MakeModelAWorkflow: SchemaTree → Always use top 10 recommendations
+func MakeModelAWorkflow(tree *schematree.SchemaTree) *Workflow {
+	wf := Workflow{}
+
+	wf.Push(
+		MakeAlwaysCondition(),
+		func(asm *schematree.Instance) schematree.PropertyRecommendations {
+			// Get SchemaTree recommendations
+			schemaRecs := asm.CalcRecommendations()
+
+			// Select top 8 recommendations (padding if fewer than 8 are available)
+			n := 8
+			if len(schemaRecs) > n {
+				schemaRecs = schemaRecs[:n]
+			}
+
+			return schemaRecs
+		},
+		"Always use top 8 SchemaTree recommendations",
+	)
 
 	return &wf
 }

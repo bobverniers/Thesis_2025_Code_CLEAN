@@ -1,0 +1,30 @@
+// Model C 2.0
+
+prompt := fmt.Sprintf(
+	`You are helping tag restaurants in OpenStreetMap.
+
+Current input tags: %s
+
+From the following list of candidate tag keys:
+%s
+
+Select the 8 most relevant tag keys likely to co-occur with the input. Return only those 8 keys, listed one per line.`,
+	strings.Join(inputTags, ", "),
+	strings.Join(candidates, ", "),
+)
+
+// Model C original
+prompt := fmt.Sprintf(
+	`You are helping tag restaurants in OpenStreetMap.
+
+Current input tags: %s
+
+From the following list of candidate tag keys:
+%s
+
+Select the 8 most relevant tags that are most likely to co-occur with the input, based on OpenStreetMap tagging conventions and real-world restaurant attributes.
+
+Return only the 8 tag keys, in order of relevance, one per line. Do not include explanations or any other text.`,
+	strings.Join(inputTags, ", "),
+	strings.Join(candidates, ", "),
+)
