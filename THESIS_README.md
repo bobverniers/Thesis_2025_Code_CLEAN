@@ -34,8 +34,11 @@ brew install python
 pip install pandas openai
 
 
-Step 2: Clone the repo 
+Step 2: Clone the repo in terminal 
 git clone https://github.com/bobverniers/Thesis_2025_Code_CLEAN.git
+
+
+
 cd Thesis_2025_Code_CLEAN
 
 
