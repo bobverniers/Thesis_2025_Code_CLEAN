@@ -33,27 +33,21 @@ The pre-trained `.pb` model is included in this repository.
 
 ## Setup
 
+**This guide applies for Mac Users**  
+
 ### Install dependencies:
 
-**Mac/Linux:**  
 
-```bash
+Assure that homebrew is installed
+'''
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+'''
+
+```
 brew install go  
 brew install python  
 pip install pandas openai  
 ```
-
-**Windows:**  
-
-- Download and install Go: https://go.dev/dl/  
-- Download and install Python 3: https://www.python.org/downloads/windows/  
-- In Command Prompt:  
-
-```
-pip install pandas openai  
-```
-
----
 
 ### Clone the repo:
 
@@ -66,14 +60,9 @@ cd Thesis_2025_Code_CLEAN
 
 ### Add your OpenAI API key (for Model C):
 
-**Mac/Linux Terminal:**  
+
 ```
 export OPENAI_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-```
-
-**Windows CMD:**  
-```
-set OPENAI_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
 
 You can generate your own key here: https://platform.openai.com/account/api-keys
