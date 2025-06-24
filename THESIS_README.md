@@ -84,9 +84,17 @@ go run run_models.go --input "amenity=restaurant,La Thai" --model C
 ### Reproduce evaluation results (from thesis):
 
 ```
-cd evaluation
+go to cd evaluation
+```
+## Model A 
 
+```
 python score_model_a.py --csv restaurants_antwerp.csv --max 822
+```
+
+## Model C
+
+```
 python score_model_c.py --csv restaurants_antwerp.csv --max 822
 ```
 
