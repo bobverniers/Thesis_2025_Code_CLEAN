@@ -39,9 +39,10 @@ The pre-trained `.pb` model is included in this repository.
 
 
 Assure that homebrew is installed
-'''
+
+```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-'''
+```
 
 ```
 brew install go  
