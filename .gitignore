@@ -24,3 +24,5 @@ __pycache__/
 
 # Logs
 *.log
+geofabrik/*.osm.pbf
+evaluation/*.osm.pbf
