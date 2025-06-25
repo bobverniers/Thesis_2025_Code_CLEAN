@@ -56,9 +56,37 @@ go run RecommenderServer/train_schema_tree.go \
 You can run all experiments with this pb model. 
 ---
 
-## NB: The file restaurants_antwerp.csv is already included in this repository.
-The data was extracted from OpenStreetMap (Antwerp region), using Overpass API queries.
+## Test CSV Files: The csv files needed for evaluation are already included in this repository.
 
+- `evaluation/restaurants_antwerp.csv`  
+- `evaluation/restaurants_with_hints.csv`  
+
+If you want to recreate `restaurants_antwerp.csv` yourself:
+1. Download Belgium PBF:https://download.geofabrik.de/europe/belgium.html
+Save as: geofabrik/belgium-latest.osm.pbf
+
+2. Run the extractor script:
+```
+python evaluation/antwerp_extract_restaurants.py
+```
+This will output: evaluation/restaurants_antwerp.csv
+
+3. If you want to recreate restaurants_with_hints.csv:
+
+Filter restaurants with 4 or more ground truth tags:
+```
+python evaluation/filter_gt3.py
+```
+
+This will create: evaluation/restaurants_filtered.csv
+
+Then generate restaurants_with_hints.csv with the following command.
+
+```
+python evaluation/add_hints.py
+```
+
+For full details, see the thesis Methodology section.
 
 ## Setup
 
@@ -113,7 +141,7 @@ go run run_models.go --input "amenity=restaurant,La Thai" --model C
 ### Reproduce evaluation results (from thesis):
 
 ```
-go to cd evaluation
+cd evaluation
 ```
 ## Model A 
 
@@ -145,7 +173,3 @@ python score_hints_model_c.py --csv restaurants_with_hints.csv --max 523
 
 ---
 
-## Notes:
-
-- Always run Go commands from the repo root folder:  
-`cd Thesis_2025_Code_CLEAN`

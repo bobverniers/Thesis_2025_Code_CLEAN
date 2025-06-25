@@ -1,3 +1,5 @@
+# extract_restaurants.py
+
 import osmium
 import pandas as pd
 
