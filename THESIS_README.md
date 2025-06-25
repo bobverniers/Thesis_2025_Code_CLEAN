@@ -29,7 +29,36 @@ was trained offline on Netherlands OSM data (`geofabrik/netherlands-cleaned.tsv`
 No additional training step is needed to reproduce these experiments.  
 The pre-trained `.pb` model is included in this repository.
 
+## Steps to create the .pb model yourself. NB: This step is not necessary, as the .pb model is already included. However, if you want to retrain it yourself, you can follow these steps:
+
+1. You can download the latest Netherlands .osm.pbf file.
+Download from: https://download.geofabrik.de/europe/netherlands.html
+Save as: geofabrik/netherlands-latest.osm.pbf
+
+2. Open osm_to_tsv.ipynb , change PBF path; PBF_path = "geofabrik/netherlands-latest.osm.pbf"
+
+3. Run the notebook which will output geofabrik/netherlands-latest.tsv
+
+4. Clean the TSV file, to remove rows with one tag run this in terminal:
+```
+awk 'NF > 1' geofabrik/netherlands-latest.tsv > geofabrik/netherlands-cleaned.tsv
+```
+5. Train the SchemaTree model 
+
+```
+go run RecommenderServer/train_schema_tree.go \
+  --input geofabrik/netherlands-cleaned.tsv \
+  --output geofabrik/netherlands-cleaned.tsv.schemaTree.typed.pb
+```
+
+6. This will output: geofabrik/netherlands-cleaned.tsv.schemaTree.typed.pb
+
+You can run all experiments with this pb model. 
 ---
+
+## NB: The file restaurants_antwerp.csv is already included in this repository.
+The data was extracted from OpenStreetMap (Antwerp region), using Overpass API queries.
+
 
 ## Setup
 
@@ -47,7 +76,7 @@ Assure that homebrew is installed
 ```
 brew install go  
 brew install python  
-pip install pandas openai  
+pip install pandas openai scikit-learn
 ```
 
 ### Clone the repo:
